@@ -38,8 +38,8 @@ const App = () => {
             <ProxyEntryForm onAddEntry={addProxyEntry} />
             <ProxyEntryList 
                 entries={proxyEntries} 
-                onEditEntry={editProxyEntry} 
-                onDeleteEntry={deleteProxyEntry} 
+                onEdit={editProxyEntry} // Corrected prop name
+                onDelete={deleteProxyEntry} // Corrected prop name
             />
         </div>
     );
