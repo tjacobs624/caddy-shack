@@ -19,7 +19,7 @@ const ProxyEntryList: React.FC<ProxyEntryListProps> = ({ entries, onEdit, onDele
             <ul>
                 {entries.map(entry => (
                     <li key={entry.id}>
-                        <span>{entry.domain} -> {entry.target}</span>
+                        <span>{entry.domain} {'>'} {entry.target}</span>
                         <button onClick={() => onEdit(entry)}>Edit</button>
                         <button onClick={() => onDelete(entry.id)}>Delete</button>
                     </li>
