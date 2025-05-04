@@ -1,0 +1,28 @@
+{
+  "name": "caddy-ui-manager",
+  "version": "1.0.0",
+  "description": "A simple web app to manage Caddyfile reverse proxy entries with CRUD operations.",
+  "main": "src/index.tsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "vite": "^2.6.4",
+    "@vitejs/plugin-react": "^1.0.0"
+  },
+  "keywords": [
+    "caddy",
+    "reverse-proxy",
+    "web-app",
+    "crud"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
