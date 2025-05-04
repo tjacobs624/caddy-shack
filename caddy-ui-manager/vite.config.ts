@@ -4,17 +4,12 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    open: true,
-    historyApiFallback: true, // Ensures fallback to index.html for SPA
+    port: 3000,
+    host: true,
+    open: false
   },
-  build: {
-    rollupOptions: {
-      input: '/public/index.html',
-    },
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
+  preview: {
+    port: 3000,
+    host: true
+  }
 });
