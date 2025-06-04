@@ -1,7 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ProxyEntryForm = ({ onSubmit, initialEntry }) => {
-    const [entry, setEntry] = useState(initialEntry || { domain: '', target: '' });
+interface ProxyEntry {
+    domain: string;
+    target: string;
+}
+
+interface ProxyEntryFormProps {
+    onSubmit: (entry: ProxyEntry) => void;
+    initialEntry?: ProxyEntry | null;
+}
+
+const ProxyEntryForm: React.FC<ProxyEntryFormProps> = ({ onSubmit, initialEntry }) => {
+    const [entry, setEntry] = useState<ProxyEntry>(initialEntry || { domain: '', target: '' });
+
+    useEffect(() => {
+        if (initialEntry) {
+            setEntry(initialEntry);
+        }
+    }, [initialEntry]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
