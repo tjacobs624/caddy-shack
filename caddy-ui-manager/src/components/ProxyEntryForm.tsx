@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface ProxyEntry {
     domain: string;
@@ -12,6 +12,12 @@ interface ProxyEntryFormProps {
 
 const ProxyEntryForm: React.FC<ProxyEntryFormProps> = ({ onSubmit, initialEntry }) => {
     const [entry, setEntry] = useState<ProxyEntry>(initialEntry || { domain: '', target: '' });
+
+    useEffect(() => {
+        if (initialEntry) {
+            setEntry(initialEntry);
+        }
+    }, [initialEntry]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
