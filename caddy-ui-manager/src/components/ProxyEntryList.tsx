@@ -1,15 +1,14 @@
 import React from 'react';
 
 interface ProxyEntry {
-    id: number;
     domain: string;
     target: string;
 }
 
 interface ProxyEntryListProps {
     entries: ProxyEntry[];
-    onEdit: (entry: ProxyEntry) => void;
-    onDelete: (id: number) => void;
+    onEdit: (index: number) => void;
+    onDelete: (index: number) => void;
 }
 
 const ProxyEntryList: React.FC<ProxyEntryListProps> = ({ entries, onEdit, onDelete }) => {
@@ -17,11 +16,11 @@ const ProxyEntryList: React.FC<ProxyEntryListProps> = ({ entries, onEdit, onDele
         <div>
             <h2>Proxy Entries</h2>
             <ul>
-                {entries.map(entry => (
-                    <li key={entry.id}>
+                {entries.map((entry, index) => (
+                    <li key={index}>
                         <span>{entry.domain} {'>'} {entry.target}</span>
-                        <button onClick={() => onEdit(entry)}>Edit</button>
-                        <button onClick={() => onDelete(entry.id)}>Delete</button>
+                        <button onClick={() => onEdit(index)}>Edit</button>
+                        <button onClick={() => onDelete(index)}>Delete</button>
                     </li>
                 ))}
             </ul>

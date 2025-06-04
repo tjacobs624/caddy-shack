@@ -5,6 +5,7 @@ import { readCaddyFile, writeCaddyFile } from './services/fileService';
 
 const App = () => {
     const [proxyEntries, setProxyEntries] = useState([]);
+    const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchEntries = async () => {
@@ -20,10 +21,23 @@ const App = () => {
         await writeCaddyFile(updatedEntries);
     };
 
+    const handleEntrySubmit = async (entry) => {
+        if (editingIndex !== null) {
+            await editProxyEntry(editingIndex, entry);
+            setEditingIndex(null);
+        } else {
+            await addProxyEntry(entry);
+        }
+    };
+
     const editProxyEntry = async (index, updatedEntry) => {
         const updatedEntries = proxyEntries.map((entry, i) => (i === index ? updatedEntry : entry));
         setProxyEntries(updatedEntries);
         await writeCaddyFile(updatedEntries);
+    };
+
+    const startEditingEntry = (index: number) => {
+        setEditingIndex(index);
     };
 
     const deleteProxyEntry = async (index) => {
@@ -35,10 +49,10 @@ const App = () => {
     return (
         <div>
             <h1>Caddy Reverse Proxy Manager</h1>
-            <ProxyEntryForm onAddEntry={addProxyEntry} />
-            <ProxyEntryList 
-                entries={proxyEntries} 
-                onEdit={editProxyEntry} // Corrected prop name
+            <ProxyEntryForm onSubmit={handleEntrySubmit} initialEntry={editingIndex !== null ? proxyEntries[editingIndex] : undefined} />
+            <ProxyEntryList
+                entries={proxyEntries}
+                onEdit={startEditingEntry}
                 onDelete={deleteProxyEntry} // Corrected prop name
             />
         </div>
